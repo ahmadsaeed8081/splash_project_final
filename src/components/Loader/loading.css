@@ -1,0 +1,66 @@
+
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+  }
+  .loading div {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 2rem 0.3rem;
+    background: #E45865;
+    border-radius: 50%;
+    -webkit-animation: 0.9s bounce infinite alternate;
+            animation: 0.9s bounce infinite alternate;
+  }
+  .loading div:nth-child(2) {
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+            background-color: #98DEDE !important;
+  }
+  .loading div:nth-child(3) {
+    -webkit-animation-delay: 0.6s;
+            animation-delay: 0.6s;
+            background-color: #FCD06D;
+  }
+  
+  @-webkit-keyframes bounce {
+    to {
+      opacity: 0.3;
+      transform: translate3d(0, -1rem, 0);
+    }
+  }
+  
+  @keyframes bounce {
+    to {
+      opacity: 0.3;
+      transform: translate3d(0, -1rem, 0);
+    }
+  }
+  .donut {
+    width: 2rem;
+    height: 2rem;
+    margin: 2rem;
+    border-radius: 50%;
+    border: 0.3rem solid rgba(151, 159, 208, 0.3);
+    border-top-color: #979fd0;
+    -webkit-animation: 1.5s spin infinite linear;
+            animation: 1.5s spin infinite linear;
+  }
+  .donut.multi {
+    border-bottom-color: #979fd0;
+  }
+  
+  @-webkit-keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+ 
+ 

@@ -25,7 +25,7 @@ if(count>0)
   return;
 }
 count++;
-  const web3= new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai-bor.publicnode.com"));
+const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatech.io/v1/matic/mumbai/public	"));
   
   const contract = new web3.eth.Contract(cont_abi, cont_address);
 
@@ -99,7 +99,7 @@ useEffect(()=>{
               padding: "10px", // Add some padding for spacing
             }}
           >
-            <div className="border border-gray-200 flex bg-white rounded-md gap-4 w-[80%] md:w-[40%] items-center p-2">
+            {/* <div className="border border-gray-200 flex bg-white rounded-md gap-4 w-[80%] md:w-[40%] items-center p-2">
               <i>
                 <CiSearch />
               </i>
@@ -107,7 +107,7 @@ useEffect(()=>{
                 placeholder={t("Search")}
                 className="bg-white outline-none w-full rounded-md"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="   py-12  w-full px-6 grid  grid-cols-2  xl:grid-cols-4 md:grid-cols-2 gap-5 md:gap-12">

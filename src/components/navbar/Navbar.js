@@ -149,7 +149,7 @@ const Navbar = ({usdt_balance}) => {
             <div className={`fixed h-[100%]   transition-transform  duration-500   z-40 bg-black/50 w-full  top-0 left-[-100%] ${activeNav === true ? "left-[0%]" : "left-[-100%]"}`}>
 
 
-                <div className=' w-[350px] p-4 bg-white  overflow-y-auto h-full'>
+                <div className=' w-[350px] p-4 bg-white  overflow-x-auto overflow-y-auto h-full'>
 
                     <div className='flex justify-between items-center'>
                         <div className='lg:hidden block' onClick={() => { setActiveNav(false) }}>

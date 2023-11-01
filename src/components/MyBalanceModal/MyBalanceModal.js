@@ -30,24 +30,16 @@ export default function MyBalanceModal({ visible5, onClose5 ,id,mintNFT}) {
 
 
     return (
-        <div
-
-            id="container"
-
-            onClick={handleClose5} className="   fixed   z-50 inset-0 bg-[#303439] bg-opacity-80 flex items-center justify-center">
+        <div id="container" onClick={handleClose5} className="   fixed   z-50 inset-0 bg-[#303439] bg-opacity-80 flex items-center justify-center">
 
             <div className="  w-full   fixed  h-[60%] bottom-0   bg-white bottom  p-6 rounded-xl">
 
-              
+             
+                <div className="   overflow-y-auto  no-scrollbar h-full">
 
-
-            
-
-      <div className="   overflow-y-auto  no-scrollbar h-full">
-
-      <div className=" w-14 mx-auto">
-        <h2 className="border-4 w-25 rounded-lg border-gray-200"></h2>
-      </div>
+                    <div className=" w-14 mx-auto">
+                        <h2 className="border-4 w-25 rounded-lg border-gray-200"></h2>
+                    </div>
       
                 <div>
                     <div className=" flex justify-between  items-center">
@@ -76,7 +68,7 @@ export default function MyBalanceModal({ visible5, onClose5 ,id,mintNFT}) {
 </div>
 <div>
 <span className="  text-gray-500" >NFT PRICE</span>
-    <p className=' text-lg' > 80.00 USDT</p>
+    <p className=' text-lg' > 801.00 USDT</p>
 
 </div>
 
@@ -88,23 +80,7 @@ export default function MyBalanceModal({ visible5, onClose5 ,id,mintNFT}) {
     <h2>Description</h2>
     
 <p className=" text-gray-500"> 
-                        Curabitur vehicula justo nisi, tincidunt hendrerit
-
-                        turpis art elementum eget. Ut nec posuere
-
-                        ipsum. Sed ut arcu at tellus suscipit feugiat a sit
-
-                        amet lacus... Curabitur vehicula justo nisi,
-
-                        tincidunt hendrerit turpis art elementum eget.
-
-                        Ut nec posuere ipsum. Sed ut arcu at tellus
-
-                        suscipit feugiat a sit amet lacus..... Curabitur
-
-                        vehicula justo nisi, tincidunt hendrerit turpis art
-
-                        elementum eget.
+Please be aware that NFT purchases are irreversible; once acquired, refunds are not possible. NFTs are unique digital assets with potential value fluctuations, and their purchase carries inherent risks. Ensure thorough research and understanding before making any NFT transactions.
 
                        
                     </p>

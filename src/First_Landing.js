@@ -159,7 +159,7 @@ async function mount() {
   try {
     console.log("my balanace mount "+address);
     setLoader(true)
-    const web3= new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai-bor.publicnode.com	"));
+    const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatech.io/v1/matic/mumbai/public	"));
 
     const contract = new web3.eth.Contract(cont_abi, cont_address);
     const contract_usdt = new web3.eth.Contract(tokenABI, usdt_address);
@@ -177,6 +177,7 @@ async function mount() {
     let maxSupply = await contract.methods.MAX_SUPPLY().call();
     let max_per_wallet = await contract.methods.max_per_wallet().call();
     let isReferred = await contract.methods.isReferred(address).call();
+    let refreal = await contract.methods.myreferee(address).call();
 
     let mintedList_arr = await contract.methods.get_MintedNFTs().call();
     let myNFTS = await contract.methods.get_myAllNFTs().call({from: address});
@@ -196,7 +197,7 @@ async function mount() {
 
 
 
-    set_ref_from(ref_from[0]);
+    set_ref_from(refreal);
     // setLoader(false);
 
     
@@ -255,6 +256,7 @@ function reg_referral() {
   console.log("object mint");
 // Mint_Switch?.();
 
+alert(referral)
   if (chain.id != CHAIN_ID) {
     Mint_Switch?.();
   } else {
@@ -276,7 +278,7 @@ function reg_referral() {
           <Route  path='/faqs' element={<Faq     />} />
           <Route  path='/market_place' element={<MarketPlace  mintNFT={mintNft} set_choosedNFT={set_choosedNFT} mintedNfts={mintedNfts}/>} />
           <Route  path='/my_nfts' element={<MyNfts  myNfts={myNfts} />} />
-          <Route  path='/profile' element={<Profile isReferred={isReferred} reg_referral={reg_referral} manualRefree={manualRefree} set_manualRefree={set_manualRefree} usdt_balance={usdt_balance}  myNfts={myNfts}/>} />
+          <Route  path='/profile' element={<Profile ref_from={ref_from} isReferred={isReferred} reg_referral={reg_referral} manualRefree={manualRefree} set_manualRefree={set_manualRefree} usdt_balance={usdt_balance}  myNfts={myNfts}/>} />
           <Route  path='/announcements' element={<Announcements     />} />
        
           <Route  path='/admin' element={<Admin/>} />

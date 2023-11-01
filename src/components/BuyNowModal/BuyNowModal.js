@@ -89,19 +89,8 @@ export default function BuyNowModal({ visible6, onClose6,id,mintNFT }) {
 <h2>Description</h2>
 
 <p className=" text-gray-500"> 
-                    Curabitur vehicula justo nisi, tincidunt hendrerit
+Please be aware that NFT purchases are irreversible; once acquired, refunds are not possible. NFTs are unique digital assets with potential value fluctuations, and their purchase carries inherent risks. Ensure thorough research and understanding before making any NFT transactions.
 
-                    turpis art elementum eget. Ut nec posuere
-
-                    ipsum. Sed ut arcu at tellus suscipit feugiat a sit
-
-                    amet lacus... Curabitur vehicula justo nisi,
-
-                    tincidunt hendrerit turpis art elementum eget.
-
-                    Ut nec posuere ipsum. Sed ut arcu at tellus
-
-                    suscipit feugiat a sit amet lacus.....
 
                    
                 </p>

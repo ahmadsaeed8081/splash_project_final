@@ -26,7 +26,7 @@ const BottomNavbar = () => {
                   <Link to='/market_place' onClick={()=>setNavbar('/market')} >
                     <AiFillShop  className=' ml-2' size={40} color={navbarNav==='/market'?'#DA3D4D':'black'} />
                 
-                    {navbarNav==='/market'?<h3 className=' font-semibold text-[#DA3D4D]'  >{t('MARKETPLACE')}</h3>:null}
+                    {navbarNav==='/market'?<h3 className=' font-semibold text-[#DA3D4D]'  >{t('MARKET')}</h3>:null}
 
                     </Link>
                 </div>

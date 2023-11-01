@@ -38,7 +38,7 @@ const [mintedNfts_list, set_mintedNfts] = useState([]);
 function search(e)
 {
   set_serach_value(e);
-  // searchcheck(1)
+  searchcheck(e)
 
 }
 function searchcheck(e)
@@ -49,15 +49,16 @@ function searchcheck(e)
     // for(let i=0;mintedNfts_list.length;i++)
     // {
 
-    //   if(allNfts[i]==e)
-    //   {
-    //     set_searchValueAvailable(true);
-    //     return;
-    //   }
+    //   // if(allNfts[i]==e)
+    //   // {
+    //   //   // set_searchValueAvailable(true);
+    //   //   return;
+    //   // }
 
 
       
     // }
+    // return
 
 
 }
@@ -68,7 +69,7 @@ if(count>0)
   return;
 }
 count++;
-  const web3= new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai-bor.publicnode.com	"));
+const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatech.io/v1/matic/mumbai/public	"));
   
   const contract = new web3.eth.Contract(cont_abi, cont_address);
  
@@ -163,7 +164,7 @@ mount();
             </h1>
           </div>
           <div>
-            <h1 className=" text-md md:text-xl">Available : {availbleNfts} NFTs</h1>
+            <h1 className=" text-md md:text-xl"> Available : {availbleNfts} NFTs</h1>
           </div>
         </div>
      
@@ -224,7 +225,7 @@ mount();
                         })}
                     </div>
                     <div className="pb-40">
-                      <ReactPaginate
+                      <ReactPaginate 
                         previousLabel={t("Previous")}
                         nextLabel={t("Next")}
                         pageCount={pageCount}

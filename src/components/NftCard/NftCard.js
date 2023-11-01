@@ -16,7 +16,7 @@ const NftCard = ({set_choosedNFT,category,title,oldPrice,price,description,image
   return (
    
         
-          <div key={_id} className='w-full bg-white text-black p-3 md:p-7  shadow-lg border-gray-300  rounded-xl group overflow-hidden'>
+          <div key={_id} className='w-full bg-white text-black p-3 md:p-7  shadow-lg border-gray-300  rounded-xl group overflow-hidden' >
 
           <div className='w-full h-[200px' >
               <img className=' h-full w-full object-cover rounded-xl  transition-transform duration-300'  src={image} alt='' />

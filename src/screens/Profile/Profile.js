@@ -7,12 +7,15 @@ import { Location, useLocation } from 'react-router-dom';
 import { useAccount } from 'wagmi';        
 import {FiEdit} from 'react-icons/fi';
 import { t } from 'i18next';
-
+import Web3 from 'web3';
 import { Axios } from 'axios';
 import axios  from 'axios';
-
+import {
+  cont_address,
+  cont_abi,
+} from "../../components/config";
 import { upload } from '@testing-library/user-event/dist/upload';
-const Profile = ({usdt_balance,myNfts ,manualRefree,set_manualRefree,reg_referral,isReferred}) => {
+const Profile = ({usdt_balance,myNfts ,manualRefree,set_manualRefree,reg_referral,isReferred,ref_from}) => {
 
   const [image,setImage] = useState('');
   const [name,setName] = useState('');
@@ -36,6 +39,50 @@ if(image){
       setPreview(reader.result)
   }
 }
+
+
+
+
+
+
+
+  const [allNfts, set_allNfts] = useState([]);
+
+  const data = [ ];
+  let count=0;
+
+async function mount(){
+if(count>0)
+{
+  return;
+}
+count++;
+const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatech.io/v1/matic/mumbai/public	"));
+  
+  const contract = new web3.eth.Contract(cont_abi, cont_address);
+
+  
+  let referral_data = await contract.methods.get_myAllComissions().call({from: address});
+  
+  set_allNfts(referral_data)
+}
+
+useEffect(()=>{
+  mount();
+  },[])
+
+
+
+
+
+
+
+
+
+
+
+
+
 useEffect(()=>{
   if(isConnected)
   {
@@ -163,9 +210,9 @@ async function get_data()
                     <h1 className=' text-3xl'>{t('MY Upliner')}</h1>
 
                     <div style={{ marginTop:10 }} className=' border-yellow-500 rounded-lg border p-4  flex justify-between items-center'>
-                        <p>{window.location.origin}/?ref={isConnected? (address.slice(0,4)+"...."+address.slice(38,42)):(null)}</p>
+                        <p>{window.location.origin}/?ref={isConnected? (ref_from.slice(0,4)+"...."+ref_from.slice(38,42)):(null)}</p>
 
-                        <CopyToClipboard text={`${window.location.origin}/?ref=${address}`} >
+                        <CopyToClipboard text={`${window.location.origin}/?ref=${ref_from}`} >
                           <button className="copy-icon flex items-center justify-center">
                         <PiCopySimpleFill color='orange' className=' text-2xl'  />
                         </button>
@@ -186,7 +233,141 @@ async function get_data()
               
 <div className="pt-7">
 
-<span>No commissions yet</span>
+
+        <div className="flex flex-col">
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full sm:px-6 lg:px-8">
+              <div className="overflow-hidden">
+                <table className="min-w-full mb-0">
+                {allNfts.length>0?(
+                  <thead className="border-b bg-gray-50 rounded-t-lg text-center">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="rounded-tl-lg text-black text-sm font-semibold px-6 md:px-12 py-4"
+                      >
+                        refree
+                      </th>
+                      <th scope="col" className="text-sm  text-black font-semibold  px-6 md:px-12 py-4">
+                        Amount
+                      </th>
+                      
+                      <th scope="col" className="text-sm text-black   font-semibold  px-6 md:px-12 py-4">
+                        Time
+                      </th>
+                      <th
+                        scope="col"
+                        className="rounded-tr-lg text-sm font-medium px-6 py-4"
+                      />
+                    </tr>
+                  </thead>
+                ):(null)}
+                  
+                  <tbody>
+
+{
+  allNfts.length>0?(
+    allNfts.map((item, index) => {
+
+      return (
+
+      <tr className="border-b">
+        <th
+          scope="row"
+          className="text-sm font-normal px-6 py-4 whitespace-nowrap text-center"
+        >
+          <div className="flex flex-row items-center justify-center">
+            
+            <div className="ml-4">
+            <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+        <button className='bg-[#919191] text-black p-2  rounded-full'>{item[1].slice(0,5)+"..."+ item[1].slice(38,42)}</button>
+        </td>                           
+            </div>
+          </div>
+        </th>
+        <td className="text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+        <div className="flex flex-row items-center justify-center">
+            
+            <div className="ml-4">
+              <p className="mb-0.5 font-medium">{item[2]/10**6}</p>
+             
+            </div>
+          </div>                     
+        </td>
+        <td className="text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+        <div className="flex flex-row items-center justify-center">
+            
+            <div className="ml-4">
+              <p className="mb-0.5 font-medium">{item[0]}</p>
+             
+            </div>
+          </div>                     
+        </td>
+        
+      </tr>
+
+
+
+    );
+    })
+
+  ):(
+
+     <span>No commissions yet</span>
+
+  )
+}
+                  {/* {allNfts.map((item, index) => {
+
+                    return (
+
+                    <tr className="border-b">
+                      <th
+                        scope="row"
+                        className="text-sm font-normal px-6 py-4 whitespace-nowrap text-center"
+                      >
+                        <div className="flex flex-row items-center justify-center">
+                          
+                          <div className="ml-4">
+                          <td className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+                      <button className='bg-[#919191] text-black p-2  rounded-full'>{item[1].slice(0,5)+"..."+ item[1].slice(38,42)}</button>
+                      </td>                           
+                          </div>
+                        </div>
+                      </th>
+                      <td className="text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+                      <div className="flex flex-row items-center justify-center">
+                          
+                          <div className="ml-4">
+                            <p className="mb-0.5 font-medium">{item[2]/10**6}</p>
+                           
+                          </div>
+                        </div>                     
+                      </td>
+                      <td className="text-sm font-normal px-6 py-4 whitespace-nowrap text-center">
+                      <div className="flex flex-row items-center justify-center">
+                          
+                          <div className="ml-4">
+                            <p className="mb-0.5 font-medium">{item[0]}</p>
+                           
+                          </div>
+                        </div>                     
+                      </td>
+                      
+                    </tr>
+
+
+
+                  );
+                  })} */}
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
 </div>
                
 

@@ -14,7 +14,7 @@ import Announcements from './screens/Announcements/Announcements';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
-import { bscTestnet} from 'wagmi/chains'
+import { polygonMumbai} from 'wagmi/chains'
 import React,{useState} from 'react'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 
@@ -41,7 +41,7 @@ function App() {
 
     const [_address, set_address] = useState(null);
   
-    const chains = [bscTestnet]
+    const chains = [polygonMumbai]
   const projectId = '8b3cd7dcbfb565705532d880d73759f2'
   
   const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])

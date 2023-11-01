@@ -256,10 +256,12 @@ function reg_referral() {
   console.log("object mint");
 // Mint_Switch?.();
 
-alert(referral)
   if (chain.id != CHAIN_ID) {
     Mint_Switch?.();
+
   } else {
+    alert("id match")
+
     usdt_approval?.();
   }
 }

@@ -33,35 +33,17 @@ const [mintedNfts_list, set_mintedNfts] = useState([]);
   const [serach_value, set_serach_value] = useState("");
 
   const data = [ ];
+  let arr=[1000];
+
   let count=0;
+  const minted = new Map();
 
 function search(e)
 {
   set_serach_value(e);
-  searchcheck(e)
-
+//  alert( allNfts[e-1].id)
 }
-function searchcheck(e)
 
-{
-  console.log(mintedNfts_list[0])
-
-    // for(let i=0;mintedNfts_list.length;i++)
-    // {
-
-    //   // if(allNfts[i]==e)
-    //   // {
-    //   //   // set_searchValueAvailable(true);
-    //   //   return;
-    //   // }
-
-
-      
-    // }
-    // return
-
-
-}
 
 async function mount(){
 if(count>0)
@@ -75,6 +57,13 @@ const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatec
  
   
   let mintedList_arr = await contract.methods.get_MintedNFTs().call();
+  for(let j=0; j<mintedList_arr.length;j++)
+  {        
+    arr[mintedList_arr[j]]=true;
+    set_mintedNfts(arr)
+
+    // minted.set("data"+mintedList_arr[j],true)
+  }
   for(let i=1;i<=999;i++)
   {
     let allow=true;
@@ -102,7 +91,6 @@ const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatec
         })
   }
   }
-  set_mintedNfts(mintedList_arr)
   set_allNfts(data)
   set_available_nfts(data.length)
 }
@@ -245,7 +233,7 @@ mount();
             <div style={{ paddingBottom:100 }}>
             <div className="   py-12  w-full px-6 grid  grid-cols-2  xl:grid-cols-4 md:grid-cols-2 gap-5 md:gap-12">
 
-                 {serach_value > 999 ? (
+                 {serach_value > 999 || mintedNfts_list[serach_value]==true ? (
 
                 <p  style={{ fontSize:20, fontWeight:800 }} > NOT FOUND</p>
                  ):(

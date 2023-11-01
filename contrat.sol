@@ -93,19 +93,20 @@ contract Slash is ERC721, Ownable {
     uint256 public totalSupply;    
     uint256 public decimals = 6;
     uint256 public referralFeePercentage = 15;
-
+// address public token_Contract = 0x1092fd852C82983F54Fb56aa71ADd5BCaAB6Ff4a; 
     address public token_Contract = 0xc16b32F200eA3c91E06c016e3F19738459F74146; 
-    address royaltyAddress;
+    address royaltyAddress;    
+
 
     mapping(address => uint256) public publicMinted;
     uint[] public mintedList;
-    mapping(address => string) public profileName;
+    // mapping(address => string) public profileName;
     mapping(address => address) public myreferee;
     mapping(address => ReferralData[]) public referrelList;
     mapping(address => uint256) public myReferrelCount;
     mapping(address => bool) public isReferred;
-    mapping(address => string)public myImgPath;
-    mapping(address => bool)public isImgSaved;
+    // mapping(address => string)public myImgPath;
+    // mapping(address => bool)public isImgSaved;
 
    struct ReferralData {
         uint256 time;
@@ -117,7 +118,7 @@ contract Slash is ERC721, Ownable {
     }
     mapping(address => data)  myWallet;
 
-    ReferralData[] public referralData;
+    // ReferralData[] public referralData;
 
     constructor(
         string memory _name,
@@ -146,19 +147,19 @@ contract Slash is ERC721, Ownable {
         if (msg.sender != owner()) {
 
             require(!paused, "The contract is paused");     
-            // require(publicMinted[msg.sender] + 1 <= max_per_wallet, "Per Wallet Limit Reached");
+            require(publicMinted[msg.sender] + 1 <= max_per_wallet, "Per Wallet Limit Reached");
 
             if(isReferred[msg.sender]){
 
             uint256 referralFee = (publicSaleCost * referralFeePercentage * 10 ** decimals) / 100;
             uint256 companyFee = (publicSaleCost * (100 - referralFeePercentage) * 10 ** decimals) / 100;
-            // require(token.balanceOf(msg.sender) >= (companyFee + referralFee ), "You do not have enough tokens to perform the transaction");
+            require(token.balanceOf(msg.sender) >= (companyFee + referralFee ), "You do not have enough tokens to perform the transaction");
 
-                // token.transferFrom(msg.sender, owner(), (companyFee));   
-                // token.transferFrom(msg.sender, myreferee[msg.sender], (referralFee)); 
+                token.transferFrom(msg.sender, owner(), (companyFee));   
+                token.transferFrom(msg.sender, myreferee[msg.sender], (referralFee)); 
 
-                uint256 refFee = referralFee * 10 ** decimals;
-            ReferralData memory referral_data = ReferralData(block.timestamp, msg.sender, refFee);
+                // uint256 refFee = referralFee * 10 ** decimals;
+            ReferralData memory referral_data = ReferralData(block.timestamp, msg.sender, referralFee);
             
             referrelList[myreferee[msg.sender]].push(referral_data);
             myReferrelCount[myreferee[msg.sender]]++;
@@ -167,18 +168,18 @@ contract Slash is ERC721, Ownable {
                 
             uint256 referralFee = (publicSaleCost * referralFeePercentage * 10 ** decimals) / 100;
             uint256 companyFee = (publicSaleCost * (100 - referralFeePercentage) * 10 ** decimals) / 100;
-            // require(token.balanceOf(msg.sender) >= (companyFee + referralFee ), "You do not have enough tokens to perform the transaction");
+            require(token.balanceOf(msg.sender) >= (companyFee + referralFee ), "You do not have enough tokens to perform the transaction");
 
-                // token.transferFrom(msg.sender, owner(), (companyFee));   
-                // token.transferFrom(msg.sender, new_ref, (referralFee));
+                token.transferFrom(msg.sender, owner(), (companyFee));   
+                token.transferFrom(msg.sender, new_ref, (referralFee));
 
 
 
-                uint256 refFee = referralFee * 10 ** decimals;
-            ReferralData memory referral_data = ReferralData(block.timestamp, msg.sender, refFee);
+                // uint256 refFee = referralFee * 10 ** decimals;
+            ReferralData memory referral_data = ReferralData(block.timestamp, msg.sender, referralFee);
             
-            referrelList[myreferee[msg.sender]].push(referral_data);
-            myReferrelCount[myreferee[msg.sender]]++;
+            referrelList[new_ref].push(referral_data);
+            myReferrelCount[new_ref]++;
             
                 isReferred[msg.sender]=true;
                 myreferee[msg.sender] = new_ref;
@@ -186,9 +187,9 @@ contract Slash is ERC721, Ownable {
             }else{
                 
                 uint256 companyFee = publicSaleCost * 10 ** decimals;
-                // require(token.balanceOf(msg.sender) >= companyFee, "You do not have enough tokens to perform the transaction");
+                require(token.balanceOf(msg.sender) >= companyFee, "You do not have enough tokens to perform the transaction");
 
-                // token.transferFrom(msg.sender, owner(), (companyFee));   
+                token.transferFrom(msg.sender, owner(), (companyFee));   
 
             }
                                                      
@@ -210,11 +211,11 @@ contract Slash is ERC721, Ownable {
         isReferred[msg.sender] = true;            
     }
 
-    function saveImg(string memory accountID) external{
+    // function saveImg(string memory accountID) external{
 
-        myImgPath[msg.sender] = accountID;
-        isImgSaved[msg.sender] = true;            
-    }
+    //     myImgPath[msg.sender] = accountID;
+    //     isImgSaved[msg.sender] = true;            
+    // }
 
     // function getProfileURL(address accountID) external view returns(string memory) {
     //     return string(abi.encodePacked(serverPath, myImgPath[accountID], ".png"));
@@ -380,9 +381,9 @@ contract Slash is ERC721, Ownable {
     //     serverPath = _serverPath;
     // }
 
-    function changeName(string memory _name) external {
-        profileName[msg.sender] = _name;
-    }
+    // function changeName(string memory _name) external {
+    //     profileName[msg.sender] = _name;
+    // }
 
     function setRoyaltyAddress(address _royaltyAddress) external onlyOwner {
         royaltyAddress = _royaltyAddress;
@@ -409,14 +410,19 @@ contract Slash is ERC721, Ownable {
        referralFeePercentage = _referralFeePercentage;
     }
 
-        function get_myAllNFTs() public view returns( uint[] memory arr) {
+    function get_myAllNFTs() public view returns( uint[] memory arr) {
 
-            return myWallet[msg.sender].myNfts;
+        return myWallet[msg.sender].myNfts;
 
     }
-        function get_MintedNFTs() public view returns( uint[] memory arr) {
+    function get_myAllComissions() public view returns( ReferralData[] memory ){
 
-            return mintedList;
+     return referrelList[msg.sender];
+
+    }
+    function get_MintedNFTs() public view returns( uint[] memory arr) {
+
+        return mintedList;
 
 
     }

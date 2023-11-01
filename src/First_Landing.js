@@ -260,7 +260,6 @@ function reg_referral() {
     Mint_Switch?.();
 
   } else {
-    alert("id match")
 
     usdt_approval?.();
   }

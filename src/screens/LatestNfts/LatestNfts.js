@@ -49,7 +49,7 @@ const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatec
 
 useEffect(()=>{
   mount();
-  },[])
+  },[mintednfts])
 
 
 

@@ -90,6 +90,8 @@ const {
   functionName: 'mint',
   args: [choosedNFT, referral],
   onSuccess(data) {
+    alert("Congrats yout NFT Has been n=minted successfully")
+
     mount();
     console.log('Success', data)
   },

@@ -62,16 +62,13 @@ const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatec
     arr[mintedList_arr[j]]=true;
     set_mintedNfts(arr)
 
-    // minted.set("data"+mintedList_arr[j],true)
   }
   for(let i=1;i<=999;i++)
   {
     let allow=true;
-    // console.log("its j "+mintedList_arr);
 
     for(let j=0; j<mintedList_arr.length;j++)
     {        
-      // console.log("its j "+mintedList_arr);
 
       if(mintedList_arr[j]==i)
       {

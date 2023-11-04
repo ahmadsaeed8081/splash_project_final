@@ -86,7 +86,7 @@ Please be aware that NFT purchases are irreversible; once acquired, refunds are 
                     </p>
 
 
-<button className="primary-btn w-full py-2" onClick={()=>mintNFT(id)} >BUY NOW</button>
+<button className="primary-btn w-full py-2" onClick={()=>{onClose5();mintNFT(id)}} >BUY NOW</button>
 </div>
                 </div>
 

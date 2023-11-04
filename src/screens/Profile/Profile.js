@@ -14,8 +14,11 @@ import {
   cont_address,
   cont_abi,
 } from "../../components/config";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { upload } from '@testing-library/user-event/dist/upload';
 const Profile = ({usdt_balance,myNfts ,manualRefree,set_manualRefree,reg_referral,isReferred,ref_from}) => {
+  const notify = () => toast("Referral is Copied Successfully!");
 
   const [image,setImage] = useState('');
   const [name,setName] = useState('');
@@ -57,7 +60,7 @@ if(count>0)
   return;
 }
 count++;
-const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatech.io/v1/matic/mumbai/public	"));
+const web3= new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai-bor.publicnode.com"));
   
   const contract = new web3.eth.Contract(cont_abi, cont_address);
 
@@ -194,9 +197,10 @@ async function get_data()
                       <p>{window.location.origin}/?ref={isConnected? (address.slice(0,4)+"...."+address.slice(38,42)):(null)}</p>
 
                       <CopyToClipboard text={`${window.location.origin}/?ref=${address}`} >
-                        <button className="copy-icon flex items-center justify-center">
+                        <button className="copy-icon flex items-center justify-center" onClick={notify}>
                           <PiCopySimpleFill color='orange' className=' text-2xl'  />
                         </button>
+
                       </CopyToClipboard>      
                   </div>
               {/* </div> */}
@@ -213,7 +217,7 @@ async function get_data()
                         <p>{window.location.origin}/?ref={isConnected? (ref_from.slice(0,4)+"...."+ref_from.slice(38,42)):(null)}</p>
 
                         <CopyToClipboard text={`${window.location.origin}/?ref=${ref_from}`} >
-                          <button className="copy-icon flex items-center justify-center">
+                          <button className="copy-icon flex items-center justify-center" >
                         <PiCopySimpleFill color='orange' className=' text-2xl'  />
                         </button>
                               </CopyToClipboard>      
@@ -404,6 +408,8 @@ async function get_data()
         </div>
         </div>
         <ManualReferral showModal_ref={showModal_ref} refModal={refModal} manualRefree={manualRefree} set_manualRefree={set_manualRefree} reg_referral={reg_referral}/>
+        <ToastContainer />
+
     </div>
   )
 }

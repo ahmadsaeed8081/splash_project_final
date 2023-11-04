@@ -161,7 +161,7 @@ async function mount() {
   try {
     console.log("my balanace mount "+address);
     setLoader(true)
-    const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatech.io/v1/matic/mumbai/public	"));
+    const web3= new Web3(new Web3.providers.HttpProvider("https://polygon-mumbai-bor.publicnode.com"));
 
     const contract = new web3.eth.Contract(cont_abi, cont_address);
     const contract_usdt = new web3.eth.Contract(tokenABI, usdt_address);

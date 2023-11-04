@@ -115,7 +115,7 @@ for the intended message to be read by intended user
 
 for intended purposes only for intended use...
 </p> */}
-<button className="primary-btn  w-52 py-2" onClick={()=>mintNFT(id)}>BUY NOW</button>
+<button className="primary-btn  w-52 py-2" onClick={()=>{onClose6();mintNFT(id)}}>BUY NOW</button>
 </div>
 
     {/* <button className="primary-btn py-2 mt-10  w-full md:w-64">BUY NOW</button> */}

@@ -34,7 +34,7 @@ const web3= new Web3(new Web3.providers.HttpProvider("https://endpoints.omniatec
   {
 
     let owner = await contract.methods.ownerOf(mintedList_arr[i]).call();
-    let refreal = await contract.methods.myreferee(address).call();
+    let refreal = await contract.methods.myreferee(owner).call();
 
         let img= ("./images/"+mintedList_arr[i]+".png")
         // alert(img)
